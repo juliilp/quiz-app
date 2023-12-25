@@ -7,7 +7,6 @@ interface IRespuesta {
 
 export default function AgregarJuego() {
   const [juego, setJuego] = useState({
-    nombre: "",
     pregunta: "",
     respuestas: [
       { respuesta: "", isCorrect: false },
@@ -18,9 +17,6 @@ export default function AgregarJuego() {
 
   const handlerButton = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(juego.nombre.length < 5) {
-        return alert("El nombre del juego no puede tener menos de 5 letras")
-    }
     if(juego.pregunta.length < 5) {
         return alert("El nombre de la pregunta no puede tener menos de 5 letras")
     }
@@ -30,7 +26,6 @@ export default function AgregarJuego() {
     localStorage.setItem("Games", JSON.stringify(updatedGames));
 
     setJuego({
-        nombre: "",
         pregunta: "",
         respuestas: [
           { respuesta: "", isCorrect: false },
@@ -69,11 +64,6 @@ export default function AgregarJuego() {
   return (
     <main>
       <form onSubmit={handlerButton}>
-        <article>
-          <span>Nombre del juego:</span>
-          <input type="text" onChange={handlerOnChange} name="nombre" value={juego.nombre} />
-        </article>
-
         <article>
           <span>Pregunta:</span>
           <input type="text" onChange={handlerOnChange} name="pregunta" value={juego.pregunta} />
