@@ -1,3 +1,5 @@
 export interface IContext {
-    algo : string
+    AccessoTerminadoTrue : () => void
+    AccessoTerminadoFalse : () => void
+    accesoTerminado: boolean
 }

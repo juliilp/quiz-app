@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useGlobalStore from "../hooks/useGlobalStore";
 
 interface Respuesta {
   respuesta: string;
@@ -13,32 +14,36 @@ interface Pregunta {
 }
 
 export default function Resultados() {
+  const {accesoTerminado, AccessoTerminadoFalse} = useGlobalStore()
   const navigate = useNavigate();
   const [respuestaCorrecta, setRespuestaCorrecta] = useState<Pregunta[]>([]);
   const [respuestaIncorrecta, setRespuestaIncorrecta] = useState<Pregunta[]>(
     []
   );
-
   useEffect(() => {
+    if(!accesoTerminado) {
+      navigate("/")
+    }
     const localStorageRespuestaCorrecta = localStorage.getItem(
       "respuestasCorrectas"
-    );
-    const localStorageRespuestaIncorrecta = localStorage.getItem(
-      "respuestasIncorrectas"
-    );
-
-    if (localStorageRespuestaCorrecta !== null) {
-      setRespuestaCorrecta(JSON.parse(localStorageRespuestaCorrecta));
-    }
-    if (localStorageRespuestaIncorrecta !== null) {
-      setRespuestaIncorrecta(JSON.parse(localStorageRespuestaIncorrecta));
-    }
-  }, []);
+      );
+      const localStorageRespuestaIncorrecta = localStorage.getItem(
+        "respuestasIncorrectas"
+        );
+        
+        if (localStorageRespuestaCorrecta !== null) {
+          setRespuestaCorrecta(JSON.parse(localStorageRespuestaCorrecta));
+        }
+        if (localStorageRespuestaIncorrecta !== null) {
+          setRespuestaIncorrecta(JSON.parse(localStorageRespuestaIncorrecta));
+        }
+      }, []);
 
   const handlerResultados = () => {
     localStorage.setItem("respuestasCorrectas", JSON.stringify([]));
     localStorage.setItem("respuestasIncorrectas", JSON.stringify([]));
     navigate("/");
+    AccessoTerminadoFalse()
   };
   return (
     <main>
@@ -66,12 +71,12 @@ export default function Resultados() {
               return (
                 <>
                   <span key={key} className="block">
-                    {r.pregunta}
+                  La pregunta: {r.pregunta}
                   </span>
                   <span>
-                    Su respuesta correcta era:
-                    {r.respuestas.map((r) => {
-                      return r.isCorrect && <strong>{r.respuesta}</strong>;
+                    Su respuesta correcta: 
+                    {r.respuestas.map((r, key) => {
+                      return r.isCorrect && <strong key={key} > {r.respuesta}</strong>;
                     })}
                   </span>
                   <span></span>

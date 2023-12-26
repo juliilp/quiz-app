@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import useGlobalStore from "../hooks/useGlobalStore";
+import { IContext } from "../interface/Icontext";
 interface Respuesta {
   respuesta: string;
   isCorrect: boolean;
@@ -13,9 +14,8 @@ interface Pregunta {
 }
 
 export default function Home() {
+  const {AccessoTerminadoTrue} : IContext  = useGlobalStore()
   const navigate = useNavigate()
-  const [respuestasCorrectas, setRespuestasCorrectas] = useState<Pregunta[]>([]);
-  const [respuestasIncorrectas, setRespuestasIncorrectas] = useState<Pregunta[]>([]);
   const [preguntas, setPreguntas] = useState<Pregunta[]>([]);
   const [numero, setNumero] = useState(0);
   const [checkbox, setCheckbox] = useState({
@@ -38,12 +38,11 @@ export default function Home() {
     } else {
       const respuestasFiltradasCorrectas = preguntas.filter((p) => p.respuestaUser === true);
       const respuestasFiltradasIncorrectas = preguntas.filter((p) => p.respuestaUser === false)
-      setRespuestasCorrectas(respuestasFiltradasCorrectas);
-      setRespuestasIncorrectas(respuestasFiltradasIncorrectas)
       localStorage.setItem("respuestasCorrectas", JSON.stringify(respuestasFiltradasCorrectas))
       localStorage.setItem("respuestasIncorrectas", JSON.stringify(respuestasFiltradasIncorrectas))
-
+      localStorage.setItem("Terminado", JSON.stringify(true))
       navigate("/resultados")
+      AccessoTerminadoTrue()
     }
   };
 
@@ -64,21 +63,23 @@ export default function Home() {
   };
 
   const resetCheckbox = () => setCheckbox({ checkbox1: false, checkbox2: false, checkbox3: false });
-  console.log(preguntas)
   return (
     <main>
-      <span>{preguntas[numero]?.pregunta}</span>
+      <h1 className="text-xl md:text-3xl text-center my-16" >{preguntas[numero]?.pregunta}</h1>
+      <article className="flex flex-wrap items-center justify-around" >
       {preguntas.length > 0 &&
         preguntas[numero].respuestas.map((r, key) => (
           <article key={key} className="flex gap-4 items-center">
-            <span className="text-xl">{r.respuesta}</span>
+            <h3 className="text-2xl">{r.respuesta}</h3>
             <input
               type="checkbox"
               onChange={handlerCheckbox(key)}
               checked={checkbox[`checkbox${key + 1}`]}
+              className="h-6 w-6 rounded-full cursor-pointer"
             />
           </article>
         ))}
+      </article>
         <button onClick={handlerSigNumero}>
           {
             preguntas.length > numero + 1 ? " Sig pregunta" : "Ver resultados"
