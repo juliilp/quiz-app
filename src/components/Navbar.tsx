@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <header className="w-full" >
       <nav className="w-full" >
-        <ul className="flex items-center gap-4 justify-around h-16">
+        <ul className="flex items-center gap-4 justify-around h-16 shadow-xl">
           <li>
             <Link to="/">Inicio</Link>
           </li>
