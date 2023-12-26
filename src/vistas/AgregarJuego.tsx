@@ -21,8 +21,11 @@ export default function AgregarJuego() {
     if (juego.pregunta.length < 5) {
       return alert("El nombre de la pregunta no puede tener menos de 5 letras");
     }
+
     const gamesString = localStorage.getItem("Games");
     const games = gamesString ? JSON.parse(gamesString) : [];
+    const filterGames = games.filter((g) => g.pregunta === juego.pregunta)
+    if(filterGames.length > 0) return alert("Ya existe un juego con esa pregunta")
     const updatedGames = [...games, juego];
     localStorage.setItem("Games", JSON.stringify(updatedGames));
 
