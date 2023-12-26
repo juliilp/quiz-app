@@ -2,16 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useGlobalStore from "../hooks/useGlobalStore";
 import { IContext } from "../interface/Icontext";
-interface Respuesta {
-  respuesta: string;
-  isCorrect: boolean;
-}
-
-interface Pregunta {
-  pregunta: string;
-  respuestas: Respuesta[];
-  respuestaUser: boolean;
-}
+import { Pregunta } from "../interface/Pregunta";
 
 export default function Home() {
   const {AccessoTerminadoTrue} : IContext  = useGlobalStore()
@@ -73,8 +64,8 @@ export default function Home() {
       {preguntas.length > 0 &&
         preguntas[numero].respuestas.map((r, key) => (
           <article key={key} className="flex gap-4 items-center">
-            <h3 className="text-2xl">{r.respuesta}</h3>
-            <input
+            <h3 className="text-2xl max-w-[200px] break-words">{r.respuesta}</h3>
+            <input  
               type="checkbox"
               onChange={handlerCheckbox(key)}
               checked={checkbox[`checkbox${key + 1}` as keyof typeof checkbox ]}
