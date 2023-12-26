@@ -49,7 +49,7 @@ export default function Home() {
   const handlerCheckbox = (index: number) => () => {
     const isCorrect = preguntas[numero].respuestas[index].isCorrect;
     const updatedCheckbox = { checkbox1: false, checkbox2: false, checkbox3: false };
-    updatedCheckbox[`checkbox${index + 1}`] = true;
+    updatedCheckbox[`checkbox${index + 1}` as keyof typeof checkbox] = true;
     setCheckbox(updatedCheckbox);
 
     setPreguntas((prevPreguntas) => {
@@ -74,7 +74,7 @@ export default function Home() {
             <input
               type="checkbox"
               onChange={handlerCheckbox(key)}
-              checked={checkbox[`checkbox${key + 1}`]}
+              checked={checkbox[`checkbox${key + 1}` as keyof typeof checkbox ]}
               className="h-6 w-6 rounded-full cursor-pointer"
             />
           </article>
