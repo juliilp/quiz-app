@@ -16,6 +16,7 @@ interface Pregunta {
 export default function Home() {
   const {AccessoTerminadoTrue} : IContext  = useGlobalStore()
   const navigate = useNavigate()
+  const [checkBoxSelect, setCheckBoxSelect] = useState(false)
   const [preguntas, setPreguntas] = useState<Pregunta[]>([]);
   const [numero, setNumero] = useState(0);
   const [checkbox, setCheckbox] = useState({
@@ -32,6 +33,7 @@ export default function Home() {
   }, []);
 
   const handlerSigNumero = () => {
+    if(!checkBoxSelect) return alert("Selecciona un checkbox para avanzar")
     if (preguntas.length > numero + 1) {
       setNumero(numero + 1);
       resetCheckbox();
@@ -44,6 +46,7 @@ export default function Home() {
       navigate("/resultados")
       AccessoTerminadoTrue()
     }
+    setCheckBoxSelect(false)
   };
 
   const handlerCheckbox = (index: number) => () => {
@@ -51,7 +54,7 @@ export default function Home() {
     const updatedCheckbox = { checkbox1: false, checkbox2: false, checkbox3: false };
     updatedCheckbox[`checkbox${index + 1}` as keyof typeof checkbox] = true;
     setCheckbox(updatedCheckbox);
-
+    setCheckBoxSelect(true)
     setPreguntas((prevPreguntas) => {
       const updatedPreguntas = [...prevPreguntas];
       updatedPreguntas[numero] = {
