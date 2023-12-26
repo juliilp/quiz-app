@@ -4,6 +4,7 @@ import Panel from "./vistas/Panel";
 import Navbar from "./components/Navbar";
 import GlobalStore from "./store/globalStore";
 import AgregarJuego from "./vistas/AgregarJuego";
+import Resultados from "./vistas/Resultados";
 export default function App() {
   return (
     <GlobalStore>
@@ -13,6 +14,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/panel" element={<Panel />} />
           <Route path="/agregar-juego" element={<AgregarJuego />} />
+          <Route path="/resultados" element={<Resultados />} />
 
         </Routes>
       </BrowserRouter>

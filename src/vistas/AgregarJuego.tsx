@@ -11,14 +11,15 @@ export default function AgregarJuego() {
     respuestas: [
       { respuesta: "", isCorrect: false },
       { respuesta: "", isCorrect: false },
-      { respuesta: "", isCorrect: false }
+      { respuesta: "", isCorrect: false },
     ] as IRespuesta[],
+    respuestaUser: false,
   });
 
   const handlerButton = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if(juego.pregunta.length < 5) {
-        return alert("El nombre de la pregunta no puede tener menos de 5 letras")
+    if (juego.pregunta.length < 5) {
+      return alert("El nombre de la pregunta no puede tener menos de 5 letras");
     }
     const gamesString = localStorage.getItem("Games");
     const games = gamesString ? JSON.parse(gamesString) : [];
@@ -26,47 +27,60 @@ export default function AgregarJuego() {
     localStorage.setItem("Games", JSON.stringify(updatedGames));
 
     setJuego({
-        pregunta: "",
-        respuestas: [
-          { respuesta: "", isCorrect: false },
-          { respuesta: "", isCorrect: false },
-          { respuesta: "", isCorrect: false }
-        ] as IRespuesta[],
-      })
-      alert("Creado con éxito")
+      pregunta: "",
+      respuestas: [
+        { respuesta: "", isCorrect: false },
+        { respuesta: "", isCorrect: false },
+        { respuesta: "", isCorrect: false },
+      ] as IRespuesta[],
+      respuestaUser: false,
+    });
+    alert("Creado con éxito");
   };
 
   const handlerOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setJuego({ ...juego, [e.target.name]: e.target.value });
   };
 
-  const handlerOnChangeRespuesta = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    const nuevaRespuesta: IRespuesta = {
-      respuesta: e.target.value,
-      isCorrect: juego.respuestas[index].isCorrect, 
+  const handlerOnChangeRespuesta =
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const nuevaRespuesta: IRespuesta = {
+        respuesta: e.target.value,
+        isCorrect: juego.respuestas[index].isCorrect,
+      };
+
+      setJuego((prevJuego) => ({
+        ...prevJuego,
+        respuestas: prevJuego.respuestas.map((respuesta, i) =>
+          i === index ? nuevaRespuesta : respuesta
+        ),
+      }));
     };
 
-    setJuego((prevJuego) => ({
-      ...prevJuego,
-      respuestas: prevJuego.respuestas.map((respuesta, i) => (i === index ? nuevaRespuesta : respuesta)),
-    }));
-  };
+  const CheckBoxHandler =
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const isChecked = e.target.checked;
 
-  const CheckBoxHandler = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isChecked = e.target.checked;
-
-    setJuego((prevJuego) => ({
-      ...prevJuego,
-      respuestas: prevJuego.respuestas.map((respuesta, i) => (i === index ? { ...respuesta, isCorrect: isChecked } : respuesta)),
-    }));
-  };
+      setJuego((prevJuego) => ({
+        ...prevJuego,
+        respuestas: prevJuego.respuestas.map((respuesta, i) =>
+          i === index ? { ...respuesta, isCorrect: isChecked } : respuesta
+        ),
+        respuestaUser: false
+      }));
+    };
 
   return (
     <main>
       <form onSubmit={handlerButton}>
         <article>
           <span>Pregunta:</span>
-          <input type="text" onChange={handlerOnChange} name="pregunta" value={juego.pregunta} />
+          <input
+            type="text"
+            onChange={handlerOnChange}
+            name="pregunta"
+            value={juego.pregunta}
+          />
         </article>
 
         {juego.respuestas.map((respuesta, index) => (
@@ -82,7 +96,7 @@ export default function AgregarJuego() {
             <input
               type="checkbox"
               onChange={CheckBoxHandler(index)}
-              checked={respuesta.isCorrect || false }
+              checked={respuesta.isCorrect || false}
             />
           </article>
         ))}
