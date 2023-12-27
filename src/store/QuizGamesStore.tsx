@@ -25,13 +25,6 @@ export default function QuizGamesStore({ children }: any) {
     }
   }, []);
 
-  useEffect(() => {
-    const existingGames = localStorage.getItem("Games");
-    if (!existingGames) {
-      localStorage.setItem("Games", JSON.stringify([]));
-    }
-  }, []);
-
   const AccessoTerminadoTrue = () => setAccesoTerminado(true);
   const AccessoTerminadoFalse = () => setAccesoTerminado(false);
 
