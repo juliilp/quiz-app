@@ -44,17 +44,21 @@ export default function AgregarJuego() {
     }
     
   return (
-    <main>
-      <form onSubmit={handlerConPreventDefault}>
-        <article>
-          <span>Pregunta:</span>
-          <input
+    <main className="w-full" >
+      <form onSubmit={handlerConPreventDefault} className="w-full" >
+        
+          
+      <article className="w-full flex items-center justify-center my-12" >
+      <input
             type="text"
             onChange={handlerOnChange}
             name="pregunta"
             value={juego.pregunta}
+            placeholder="Nombre de la pregunta..."
+            className="py-2 pl-3 w-[300px] outline-none "
           />
-        </article>
+      </article>
+       
 
         {juego.respuestas.map((respuesta, index) => (
           <article key={index}>
