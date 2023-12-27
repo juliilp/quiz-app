@@ -2,7 +2,7 @@ import { Pregunta } from "./Pregunta"
 
 export interface IRespuesta {
     isCorrect: boolean;
-    respuesta?: string;
+    respuesta: string;
   }
 
 
