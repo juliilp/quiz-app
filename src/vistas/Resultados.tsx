@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useGlobalStore from "../hooks/useGlobalStore";
-
+import useQuizGamesStore from '../hooks/useQuizGamesStore'
 interface Respuesta {
   respuesta: string;
   isCorrect: boolean;
@@ -14,7 +13,7 @@ interface Pregunta {
 }
 
 export default function Resultados() {
-  const { accesoTerminado, AccessoTerminadoFalse, allGames } = useGlobalStore();
+  const { accesoTerminado, AccessoTerminadoFalse, allGames } = useQuizGamesStore();
   const navigate = useNavigate();
   const [respuestaCorrecta, setRespuestaCorrecta] = useState<Pregunta[]>([]);
   const [respuestaIncorrecta, setRespuestaIncorrecta] = useState<Pregunta[]>(

@@ -1,4 +1,4 @@
-import useGlobalStore from "../hooks/useGlobalStore";
+import useQuizGamesStore from '../hooks/useQuizGamesStore'
 import CardBorrarPregunta from "../components/CardBorrarPregunta";
 import { Pregunta } from "../interface/Pregunta";
 import { useEffect } from "react";
@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function BorrarPreguntas() {
   const navigate = useNavigate()
-  const { allGames, handlerBorrarPregunta, } = useGlobalStore();
+  const { allGames, handlerBorrarPregunta, } = useQuizGamesStore();
 
   useEffect(() => {
     if(allGames.length === 0) {

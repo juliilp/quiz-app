@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useGlobalStore from "../hooks/useGlobalStore";
+import useQuizGamesStore from '../hooks/useQuizGamesStore'
 import { IContext } from "../interface/Icontext";
 import { Pregunta } from "../interface/Pregunta";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-  const {allGames} = useGlobalStore()
-  const {AccessoTerminadoTrue} : IContext  = useGlobalStore()
+  const {allGames,AccessoTerminadoFalse} = useQuizGamesStore()
+  const {AccessoTerminadoTrue} : IContext  = useQuizGamesStore()
   const navigate = useNavigate()
   const [checkBoxSelect, setCheckBoxSelect] = useState(false)
   const [preguntas, setPreguntas] = useState<Pregunta[]>([]);
@@ -64,6 +65,20 @@ export default function Home() {
   },[allGames])
   return (
     <main>
+      <ul>
+      <li>
+            <Link to="/QuizGames/agregar-juego"
+            onClick={() => AccessoTerminadoFalse()}
+            >Agregar juego</Link>
+          </li>
+          {
+            allGames.length > 0 && <li>
+              <Link to="/QuizGames/borrarPreguntas" >
+              Borrar pregunta
+              </Link>
+            </li>
+          }
+      </ul>
       <h1 className="text-xl md:text-3xl text-center my-16" >{preguntas[numero]?.pregunta}</h1>
       <article className="flex flex-wrap items-center justify-around" >
       {preguntas.length > 0 &&

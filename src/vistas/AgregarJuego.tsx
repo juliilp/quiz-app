@@ -1,10 +1,8 @@
-import useGlobalStore from "../hooks/useGlobalStore";
+import useQuizGamesStore from "../hooks/useQuizGamesStore";
 import { IRespuesta, Juego } from "../interface/Icontext";
 
-
-
 export default function AgregarJuego() {
-  const {handlerAgregarJuego, juego, setJuego} = useGlobalStore()
+  const {handlerAgregarJuego, juego, setJuego} = useQuizGamesStore()
 
   const handlerOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setJuego({ ...juego, [e.target.name]: e.target.value });
