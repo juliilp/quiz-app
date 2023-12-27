@@ -1,47 +1,10 @@
-import { useState } from "react";
+import useGlobalStore from "../hooks/useGlobalStore";
+import { IRespuesta, Juego } from "../interface/Icontext";
 
-interface IRespuesta {
-  isCorrect: boolean;
-  respuesta?: string;
-}
 
-import { Pregunta } from "../interface/Pregunta";
 
 export default function AgregarJuego() {
-  const [juego, setJuego] = useState({
-    pregunta: "",
-    respuestas: [
-      { respuesta: "", isCorrect: false },
-      { respuesta: "", isCorrect: false },
-      { respuesta: "", isCorrect: false },
-    ] as IRespuesta[],
-    respuestaUser: false,
-  });
-
-  const handlerButton = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (juego.pregunta.length < 5) {
-      return alert("El nombre de la pregunta no puede tener menos de 5 letras");
-    }
-
-    const gamesString = localStorage.getItem("Games");
-    const games = gamesString ? JSON.parse(gamesString) : [];
-    const filterGames = games.filter((g : Pregunta) => g.pregunta === juego.pregunta)
-    if(filterGames.length > 0) return alert("Ya existe un juego con esa pregunta")
-    const updatedGames = [...games, juego];
-    localStorage.setItem("Games", JSON.stringify(updatedGames));
-
-    setJuego({
-      pregunta: "",
-      respuestas: [
-        { respuesta: "", isCorrect: false },
-        { respuesta: "", isCorrect: false },
-        { respuesta: "", isCorrect: false },
-      ] as IRespuesta[],
-      respuestaUser: false,
-    });
-    alert("Creado con éxito");
-  };
+  const {handlerAgregarJuego, juego, setJuego} = useGlobalStore()
 
   const handlerOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setJuego({ ...juego, [e.target.name]: e.target.value });
@@ -54,7 +17,7 @@ export default function AgregarJuego() {
         isCorrect: juego.respuestas[index].isCorrect,
       };
 
-      setJuego((prevJuego) => ({
+      setJuego((prevJuego: Juego) => ({
         ...prevJuego,
         respuestas: prevJuego.respuestas.map((respuesta, i) =>
           i === index ? nuevaRespuesta : respuesta
@@ -66,7 +29,7 @@ export default function AgregarJuego() {
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       const isChecked = e.target.checked;
 
-      setJuego((prevJuego) => ({
+      setJuego((prevJuego: Juego) => ({
         ...prevJuego,
         respuestas: prevJuego.respuestas.map((respuesta, i) =>
           i === index ? { ...respuesta, isCorrect: isChecked } : respuesta
@@ -75,9 +38,13 @@ export default function AgregarJuego() {
       }));
     };
 
+   const  handlerConPreventDefault = (e: React.FormEvent<HTMLFormElement>) => {
+      handlerAgregarJuego(e)
+    }
+    
   return (
     <main>
-      <form onSubmit={handlerButton}>
+      <form onSubmit={handlerConPreventDefault}>
         <article>
           <span>Pregunta:</span>
           <input

@@ -1,13 +1,23 @@
 import { createContext, useEffect, useState } from "react";
-import { IContext } from "../interface/Icontext";
+import { IContext, IRespuesta } from "../interface/Icontext";
 import { Pregunta } from "../interface/Pregunta";
+
+
 
 export const store = createContext<IContext | null>(null);
 
 export default function GlobalStore({ children }: any) {
   const [accesoTerminado, setAccesoTerminado] = useState(false);
   const [allGames, setAllGames] = useState<Pregunta[]>([]);
-
+  const [juego, setJuego] = useState({
+    pregunta: "",
+    respuestas: [
+      { respuesta: "", isCorrect: false },
+      { respuesta: "", isCorrect: false },
+      { respuesta: "", isCorrect: false },
+    ] as IRespuesta[],
+    respuestaUser: false,
+  });
   useEffect(() => {
     let gamesLocalStorage: string | null = localStorage.getItem("Games");
 
@@ -29,9 +39,34 @@ export default function GlobalStore({ children }: any) {
 
   const handlerBorrarPregunta = (pregunta: string) => {
     const newGames = allGames.filter((p: Pregunta) => p.pregunta !== pregunta);
-    setAllGames(newGames);
     localStorage.setItem("Games", JSON.stringify(newGames));
+    setAllGames(newGames);
   };
+  const handlerAgregarJuego = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (juego.pregunta.length < 5) {
+      return alert("El nombre de la pregunta no puede tener menos de 5 letras");
+
+       }
+      const gamesString = localStorage.getItem("Games");
+      const games = gamesString ? JSON.parse(gamesString) : [];
+      const filterGames = games.filter((g : Pregunta) => g.pregunta === juego.pregunta)
+      if(filterGames.length > 0) return alert("Ya existe un juego con esa pregunta")
+      const updatedGames = [...games, juego];
+      localStorage.setItem("Games", JSON.stringify(updatedGames));
+      setAllGames(updatedGames)
+      setJuego({
+        pregunta: "",
+        respuestas: [
+          { respuesta: "", isCorrect: false },
+          { respuesta: "", isCorrect: false },
+          { respuesta: "", isCorrect: false },
+        ] as IRespuesta[],
+        respuestaUser: false,
+      });
+      alert("Creado con éxito");
+  }
+
 
   const values : IContext = {
     AccessoTerminadoTrue,
@@ -39,7 +74,11 @@ export default function GlobalStore({ children }: any) {
     AccessoTerminadoFalse,
     allGames,
     handlerBorrarPregunta,
+    handlerAgregarJuego,
+    setJuego,
+    juego,
   };
+
 
   return (
     <store.Provider value={values}>
