@@ -14,7 +14,7 @@ interface Pregunta {
 }
 
 export default function Resultados() {
-  const { accesoTerminado, AccessoTerminadoFalse } = useGlobalStore();
+  const { accesoTerminado, AccessoTerminadoFalse, allGames } = useGlobalStore();
   const navigate = useNavigate();
   const [respuestaCorrecta, setRespuestaCorrecta] = useState<Pregunta[]>([]);
   const [respuestaIncorrecta, setRespuestaIncorrecta] = useState<Pregunta[]>(
@@ -37,6 +37,10 @@ export default function Resultados() {
     if (localStorageRespuestaIncorrecta !== null) {
       setRespuestaIncorrecta(JSON.parse(localStorageRespuestaIncorrecta));
     }
+    console.log("Respuestas Correctas: ");
+    console.log(respuestaCorrecta);
+    console.log("Respuestas Incorrectas: ");
+    console.log(respuestaIncorrecta);
   }, []);
 
   const handlerResultados = () => {
@@ -48,59 +52,29 @@ export default function Resultados() {
 
   return (
     <main>
-      {respuestaCorrecta.length > 0 && (
-        <article>
-          <span>Respuestas Correctas:</span>
-
-          {respuestaCorrecta.map((r, key) => {
-            console.log(respuestaCorrecta);
-            return (
-              <article>
-                <span key={key}>{r.pregunta}</span>
-                <ul>
-                  {r.respuestas.map((re, index) => {
-                    return (
-                      <li key={index}>
-                        <span>
-                          {re.respuesta} {re.isCorrect === true ? "✅" : "❌"}
-                        </span>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </article>
-            );
-          })}
-        </article>
-      )}
-      {respuestaIncorrecta.length > 0 && (
-        <article>
-          <span>Respuestas Incorrectas:</span>
-          <article>
-            {respuestaIncorrecta.map((r, key) => {
-              return (
-                <>
-                  <span key={key} className="block">
-                    La pregunta: {r.pregunta}
-                  </span>
-                  <span>
-                    Su respuesta correcta:
-                    {r.respuestas.map((r, key) => {
-                      return (
-                        r.isCorrect && <strong key={key}> {r.respuesta}</strong>
-                      );
-                    })}
-                  </span>
-                  <span></span>
-                </>
-              );
-            })}
+      {allGames.map((g) => {
+        return (
+          <article className="flex flex-col items-center justify-center gap-8" >
+            <h2 className="text-3xl font-semibold mt-8 ">{g.pregunta}</h2>
+            <ul className="flex gap-8" >
+              {g.respuestas.map((res, key) => {
+                return (
+                  <li key={key} className="text-xl" >
+                    {res.isCorrect ? (
+                      <span>{res.respuesta}✅</span>
+                    ) : (
+                      <span>
+                        <del>{res.respuesta}</del>
+                        ❌
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
           </article>
-        </article>
-      )}
-      {respuestaCorrecta.length > 0 && respuestaIncorrecta.length === 0 && (
-        <span>No hay respuestas incorrectas!</span>
-      )}
+        );
+      })}
       <button
         onClick={handlerResultados}
         className="block py-1 px-4 bg-slate-500 rounded-lg text-white"
