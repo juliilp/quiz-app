@@ -46,11 +46,11 @@ export default function GlobalStore({ children }: any) {
     if (juego.pregunta.length < 5)
       return alert("El nombre de la pregunta no puede tener menos de 5 letras");
 
-    // Si no tiene respuesta verdaderas, que retorne un alert
+    //Recorro buscando respuestas con el isCorrect en true
     const respuestasVerdaderas : IRespuesta[] = juego.respuestas.filter(
       (r) => r.isCorrect === true
     );
-
+ // Si no tiene respuesta verdaderas, que retorne un alert
     if(respuestasVerdaderas.length === 0) {
       return alert("Al menos tiene que haber una respuesta verdadera")
     }
