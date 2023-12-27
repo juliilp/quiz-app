@@ -41,19 +41,26 @@ export default function GlobalStore({ children }: any) {
     setAllGames(newGames);
   };
   const handlerAgregarJuego = (e: React.FormEvent<HTMLFormElement>) => {
+    const respuestasMarcadas = []
     e.preventDefault();
     if (juego.pregunta.length < 5)
       return alert("El nombre de la pregunta no puede tener menos de 5 letras");
 
     // Si no tiene respuesta verdaderas, que retorne un alert
-    const respuestasVerdaderas = juego.respuestas.filter(
+    const respuestasVerdaderas : IRespuesta[] = juego.respuestas.filter(
       (r) => r.isCorrect === true
     );
 
-    if (respuestasVerdaderas.length === 0)
-      return alert("Tenes que marcar al menos una respuesta verdadera");
-
-    const gamesString = localStorage.getItem("Games");
+    // Si hay una respuesta marcada que no tiene respuesta, la pushea a "respuestasMarcadas"
+    respuestasVerdaderas.map((r) => {
+      if(r.respuesta.length < 5) {
+        respuestasMarcadas.push(r)
+      }
+    } )
+        if(respuestasMarcadas.length > 0) {
+          return alert("Las respuestas marcadas tienen que tener al menos 5 letras")
+        }
+      const gamesString = localStorage.getItem("Games");
     const games = gamesString ? JSON.parse(gamesString) : [];
     const filterGames = games.filter(
       (g: Pregunta) => g.pregunta === juego.pregunta
