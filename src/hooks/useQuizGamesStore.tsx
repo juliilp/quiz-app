@@ -1,5 +1,5 @@
 import { useContext} from "react"
-import { store } from "../store/GlobalStore"
+import { store } from "../store/QuizGamesStore"
 import { IContext } from "../interface/Icontext"
 export default function useGlobalStore() {
 

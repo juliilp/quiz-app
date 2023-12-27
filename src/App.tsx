@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./vistas/Home";
 import Navbar from "./components/Navbar";
-import GlobalStore from "./store/GlobalStore";
+import QuizGamesSore from "./store/QuizGamesStore";
 import AgregarJuego from "./vistas/AgregarJuego";
 import Resultados from "./vistas/Resultados";
 import BorrarPreguntas from "./vistas/BorrarPreguntas";
 import QuizGames from './vistas/QuizGames'
 export default function App() {
   return (
-    <GlobalStore>
+    <QuizGamesSore>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -19,6 +19,6 @@ export default function App() {
           <Route path="/QuizGames" element={<QuizGames />} />
         </Routes>
       </BrowserRouter>
-    </GlobalStore>
+    </QuizGamesSore>
   );
 }

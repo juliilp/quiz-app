@@ -4,7 +4,7 @@ import { Pregunta } from "../interface/Pregunta";
 
 export const store = createContext<IContext | null>(null);
 
-export default function GlobalStore({ children }: any) {
+export default function QuizGamesStore({ children }: any) {
   const [accesoTerminado, setAccesoTerminado] = useState(false);
   const [allGames, setAllGames] = useState<Pregunta[]>([]);
   const [juego, setJuego] = useState({
