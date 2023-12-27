@@ -1,14 +1,9 @@
-import { useEffect } from "react";
 import useGlobalStore from "../hooks/useGlobalStore";
 import CardBorrarPregunta from "../components/CardBorrarPregunta";
 import { Pregunta } from "../interface/Pregunta";
 
 export default function BorrarPreguntas() {
-  const { allGames, handlerBorrarPregunta, AccessoTerminadoTrue } = useGlobalStore();
-
-  useEffect(() => {
-    AccessoTerminadoTrue(); 
-  }, [AccessoTerminadoTrue]);
+  const { allGames, handlerBorrarPregunta, } = useGlobalStore();
 
   return (
     <main className="flex gap-8">
