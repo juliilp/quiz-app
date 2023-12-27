@@ -5,6 +5,8 @@ interface IRespuesta {
   respuesta?: string;
 }
 
+import { Pregunta } from "../interface/Pregunta";
+
 export default function AgregarJuego() {
   const [juego, setJuego] = useState({
     pregunta: "",
@@ -24,7 +26,7 @@ export default function AgregarJuego() {
 
     const gamesString = localStorage.getItem("Games");
     const games = gamesString ? JSON.parse(gamesString) : [];
-    const filterGames = games.filter((g) => g.pregunta === juego.pregunta)
+    const filterGames = games.filter((g : Pregunta) => g.pregunta === juego.pregunta)
     if(filterGames.length > 0) return alert("Ya existe un juego con esa pregunta")
     const updatedGames = [...games, juego];
     localStorage.setItem("Games", JSON.stringify(updatedGames));
