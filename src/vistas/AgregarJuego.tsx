@@ -38,6 +38,7 @@ export default function AgregarJuego() {
       }));
     };
 
+    // Hice esto así le puedo pasar el e.preventDefault por parametro al estado global
    const  handlerConPreventDefault = (e: React.FormEvent<HTMLFormElement>) => {
       handlerAgregarJuego(e)
     }
