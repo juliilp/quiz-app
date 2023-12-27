@@ -5,6 +5,7 @@ import { IContext } from "../interface/Icontext";
 import { Pregunta } from "../interface/Pregunta";
 
 export default function Home() {
+  const {allGames} = useGlobalStore()
   const {AccessoTerminadoTrue} : IContext  = useGlobalStore()
   const navigate = useNavigate()
   const [checkBoxSelect, setCheckBoxSelect] = useState(false)
@@ -17,9 +18,7 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const gamesString = localStorage.getItem("Games");
-    const games = gamesString ? JSON.parse(gamesString) : [];
-    const preguntasMezcladas = [...games].sort(() => Math.random() - 0.5);
+    const preguntasMezcladas = [...allGames].sort(() => Math.random() - 0.5);
     setPreguntas(preguntasMezcladas);
   }, []);
 
@@ -57,6 +56,12 @@ export default function Home() {
   };
 
   const resetCheckbox = () => setCheckbox({ checkbox1: false, checkbox2: false, checkbox3: false });
+
+  useEffect(() =>{
+    if(allGames.length === 0) {
+      navigate("/agregar-juego")
+    }
+  },[allGames])
   return (
     <main>
       <h1 className="text-xl md:text-3xl text-center my-16" >{preguntas[numero]?.pregunta}</h1>
