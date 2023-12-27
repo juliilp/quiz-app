@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import useGlobalStore from "../hooks/useGlobalStore";
 
 export default function Navbar() {
-  const {AccessoTerminadoFalse} = useGlobalStore()
+  const {AccessoTerminadoFalse, allGames} = useGlobalStore()
   return (
     <header className="w-full" >
       <nav className="w-full" >
@@ -17,6 +17,13 @@ export default function Navbar() {
             onClick={() => AccessoTerminadoFalse()}
             >Agregar juego</Link>
           </li>
+          {
+            allGames.length > 0 && <li>
+              <Link to="/borrarPreguntas" >
+              Borrar pregunta
+              </Link>
+            </li>
+          }
         </ul>
       </nav>
     </header>
