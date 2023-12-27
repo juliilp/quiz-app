@@ -51,6 +51,9 @@ export default function GlobalStore({ children }: any) {
       (r) => r.isCorrect === true
     );
 
+    if(respuestasVerdaderas.length === 0) {
+      return alert("Al menos tiene que haber una respuesta verdadera")
+    }
     // Si hay una respuesta marcada que no tiene respuesta, la pushea a "respuestasMarcadas"
     respuestasVerdaderas.map((r) => {
       if(r.respuesta.length < 5) {
