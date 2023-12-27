@@ -10,7 +10,7 @@ export default function BorrarPreguntas() {
 
   useEffect(() => {
     if(allGames.length === 0) {
-      navigate("/")
+      navigate("/QuizGames")
     }
   },[allGames])
   return (

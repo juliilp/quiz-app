@@ -22,7 +22,7 @@ export default function Resultados() {
   );
   useEffect(() => {
     if (!accesoTerminado) {
-      navigate("/");
+      navigate("/QuizGames")
     }
     const localStorageRespuestaCorrecta = localStorage.getItem(
       "respuestasCorrectas"

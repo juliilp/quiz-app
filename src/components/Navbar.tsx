@@ -13,13 +13,13 @@ export default function Navbar() {
             >Inicio</Link>
           </li>
           <li>
-            <Link to="/agregar-juego"
+            <Link to="/QuizGames/agregar-juego"
             onClick={() => AccessoTerminadoFalse()}
             >Agregar juego</Link>
           </li>
           {
             allGames.length > 0 && <li>
-              <Link to="/borrarPreguntas" >
+              <Link to="/QuizGames/borrarPreguntas" >
               Borrar pregunta
               </Link>
             </li>
