@@ -5,6 +5,7 @@ import { Pregunta } from "../interface/Pregunta";
 export const store = createContext<IContext | null>(null);
 
 export default function QuizGamesStore({ children }: any) {
+  const [typeGame, setTypeGame] = useState("")
   const [accesoTerminado, setAccesoTerminado] = useState(false);
   const [allGames, setAllGames] = useState<Pregunta[]>([]);
   const [juego, setJuego] = useState({
@@ -78,6 +79,21 @@ export default function QuizGamesStore({ children }: any) {
     alert("Creado con éxito");
   };
 
+  const selectQuizGames = () => {
+    localStorage.setItem("TypeGame", "QuizGames");
+    setTypeGame("QuizGames")
+  };
+
+  const selectChinchon = () => {
+    localStorage.setItem("TypeGame", "Chinchon");
+    setTypeGame("Chinchon")
+  };
+
+  const selectInicio = () => {
+    localStorage.setItem("TypeGame", "");
+    setTypeGame("")
+  };
+
   const values: IContext = {
     AccessoTerminadoTrue,
     accesoTerminado,
@@ -87,6 +103,10 @@ export default function QuizGamesStore({ children }: any) {
     handlerAgregarJuego,
     setJuego,
     juego,
+    selectQuizGames,
+    selectChinchon,
+    selectInicio,
+    typeGame
   };
 
   return <store.Provider value={values}>{children}</store.Provider>;

@@ -1,17 +1,7 @@
 import { Link } from "react-router-dom";
-
+import useQuizGamesStore from '../hooks/useQuizGamesStore'
 export default function Home() {
-  const selectQuizGames = () => {
-    localStorage.setItem("TypeGame", "QuizGames");
-  };
-
-  const selectChinchon = () => {
-    localStorage.setItem("TypeGame", "Chinchon");
-  };
-
-  const selectInicio = () => {
-    localStorage.setItem("TypGame", "");
-  };
+  const {selectQuizGames,selectChinchon} = useQuizGamesStore()
   return (
     <main>
       <h1>Juegos</h1>
