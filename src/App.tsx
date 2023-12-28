@@ -8,20 +8,27 @@ import BorrarPreguntas from "./vistas/BorrarPreguntas";
 import QuizGames from "./vistas/QuizGames";
 import { useEffect } from "react";
 import Chinchon from "./vistas/Chinchon";
+import ChinchonStore from "./store/ChinchonStore";
 export default function App() {
 
   useEffect(() => {
     const existingGames = localStorage.getItem("Games");
     const typeGames = localStorage.getItem("TypeGame")
+    const jugadoresChinchon = localStorage.getItem("JugadoresChinchon")
     if (!existingGames) {
       localStorage.setItem("Games", JSON.stringify([]));
     }
     if(!typeGames){
       localStorage.setItem("TypeGame", JSON.stringify([]))
     }
+
+    if(!jugadoresChinchon){
+      localStorage.setItem("JugadoresChinchon", JSON.stringify([]))
+    }
   }, []);
   return (
     <QuizGamesSore>
+      <ChinchonStore>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -38,6 +45,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
+      </ChinchonStore>
     </QuizGamesSore>
   );
 }
