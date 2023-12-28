@@ -104,14 +104,17 @@ export default function ChinchonStore({ children }: any) {
   };
 
   const reiniciarResultados = () => {
-    const nuevosJugadores = JSON.parse(JSON.stringify(allJugadores));
+    const res = confirm("Estas seguro de reiniciar?")
+    if(res) {
+      const nuevosJugadores = JSON.parse(JSON.stringify(allJugadores));
 
-    nuevosJugadores.forEach((v: Jugadores) => {
-      v.puntos = [0];
-    });
-
-    localStorage.setItem("JugadoresChinchon", JSON.stringify(nuevosJugadores));
-    setAllJugadores(nuevosJugadores);
+      nuevosJugadores.forEach((v: Jugadores) => {
+        v.puntos = [0];
+      });
+  
+      localStorage.setItem("JugadoresChinchon", JSON.stringify(nuevosJugadores));
+      setAllJugadores(nuevosJugadores);
+    }
   };
 
   const initialValue: values = {
