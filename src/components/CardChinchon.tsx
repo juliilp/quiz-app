@@ -13,12 +13,19 @@ export default function CardChinchon({ nombre, puntos }: Props) {
     setNewPuntos(Number(number))
   }
   const {sumarPuntos} = useChinchonStore()
+
+  const handlerSumarPuntos = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    sumarPuntos(nombre,newPuntos)
+  }
   return (
     <article className="flex flex-col" >
       <h2>{nombre}</h2>
       <p>{puntos}</p>
-      <input type="text" onChange={onChangeNewPuntos}  className="border border-black" />
-      <button onClick={() => sumarPuntos(nombre, newPuntos)} >Sumar</button>
+    <form onSubmit={handlerSumarPuntos} >
+    <input type="text" onChange={onChangeNewPuntos}  className="border border-black" />
+      <button >Sumar</button>
+    </form>
     </article>
   );
 }
