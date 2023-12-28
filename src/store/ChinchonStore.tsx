@@ -10,6 +10,7 @@ interface values {
   borrarJugador: (nombre: string) => void;
   borrarTodosJugadores: () => void;
   handlerRetroceder: (nombre: string) => void;
+  reiniciarResultados: () => void;
 }
 export const storeChinchon = createContext<values>(null);
 
@@ -101,6 +102,18 @@ export default function ChinchonStore({ children }: any) {
 
     setAllJugadores(newUsers);
   };
+
+  const reiniciarResultados = () => {
+    const nuevosJugadores = JSON.parse(JSON.stringify(allJugadores));
+
+    nuevosJugadores.forEach((v: Jugadores) => {
+      v.puntos = [0];
+    });
+
+    localStorage.setItem("JugadoresChinchon", JSON.stringify(nuevosJugadores));
+    setAllJugadores(nuevosJugadores);
+  };
+
   const initialValue: values = {
     onChangeCreateJugadores,
     handlerAddJugadores,
@@ -110,6 +123,7 @@ export default function ChinchonStore({ children }: any) {
     borrarJugador,
     borrarTodosJugadores,
     handlerRetroceder,
+    reiniciarResultados,
   };
   return (
     <storeChinchon.Provider value={initialValue}>

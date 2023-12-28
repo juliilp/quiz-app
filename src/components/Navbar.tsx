@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import useQuizGamesStore from "../hooks/useQuizGamesStore";
+import useChinchonStore from "../hooks/useChinchonStore";
 export default function Navbar() {
   const { AccessoTerminadoFalse, typeGame, selectInicio } = useQuizGamesStore();
-
+const {reiniciarResultados} = useChinchonStore()
   const handlerInicio = () => {
     AccessoTerminadoFalse();
     selectInicio();
@@ -36,7 +37,7 @@ export default function Navbar() {
                 <Link to="/Chinchon/crearjugador">Crear jugador</Link>
               </li>
               <li>
-                <button>Reiniciar resultados</button>
+                <button onClick={reiniciarResultados} >Reiniciar resultados</button>
               </li>
             </>
           )}
