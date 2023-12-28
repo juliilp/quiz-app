@@ -60,7 +60,7 @@ export default function Home() {
 
   useEffect(() =>{
     if(allGames.length === 0) {
-      navigate("/agregar-juego")
+      navigate("/QuizGames/agregar-juego")
     }
   },[allGames])
   return (
