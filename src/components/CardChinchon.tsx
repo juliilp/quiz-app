@@ -22,6 +22,8 @@ export default function CardChinchon({ nombre, puntos }: Props) {
     sumarPuntos(nombre, newPuntos);
   };
 
+  
+
   useEffect(() => {
     setPuntosTotal(puntos.reduce((acc, val) => acc + val, 0));
   }, [puntos]);
