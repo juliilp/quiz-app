@@ -20,5 +20,8 @@ export interface IContext {
     handlerAgregarJuego : (e : React.FormEvent<HTMLFormElement> ) => void
     juego: Juego
     setJuego: any
-    
+    typeGame: string
+    selectInicio: () => void
+    selectChinchon : () => void
+    selectQuizGames : () => void
 }
