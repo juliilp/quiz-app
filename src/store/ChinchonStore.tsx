@@ -44,6 +44,7 @@ export default function ChinchonStore({ children }: any) {
       nombre: "",
       puntos: [0],
     });
+    setAllJugadores(newJugadores);
   };
 
   const onChangeCreateJugadores = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,12 +72,15 @@ export default function ChinchonStore({ children }: any) {
   };
 
   const borrarJugador = (nombre: string) => {
-    const filterJugador = allJugadores.filter((j) => j.nombre === nombre);
+    const filterJugador = allJugadores.filter((j) => j.nombre !== nombre);
     if (!borrarJugador) {
       return alert("No se encontro el jugador");
     }
-    localStorage.setItem("JugadoresChinchon", JSON.stringify(filterJugador));
-    setAllJugadores(filterJugador);
+    const result = confirm("Estas seguro de borrar a " + nombre + " ?");
+    if (result) {
+      localStorage.setItem("JugadoresChinchon", JSON.stringify(filterJugador));
+      setAllJugadores(filterJugador);
+    }
   };
 
   const borrarTodosJugadores = () => {
