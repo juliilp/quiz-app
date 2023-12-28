@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import useQuizGamesStore from "../hooks/useQuizGamesStore";
 export default function Navbar() {
-  const { AccessoTerminadoFalse } = useQuizGamesStore();
+  const { AccessoTerminadoFalse, typeGame, selectInicio } = useQuizGamesStore();
 
   const handlerInicio = () => {
     AccessoTerminadoFalse();
-    localStorage.setItem("TypeGame", "");
+    selectInicio();
   };
 
   return (
@@ -13,16 +13,33 @@ export default function Navbar() {
       <nav className="w-full">
         <ul className="flex items-center gap-4 justify-around h-16 shadow-xl">
           <li>
-            <Link to="/" onClick={() => handlerInicio}>
+            <Link to="/" onClick={handlerInicio}>
               Inicio
             </Link>
           </li>
-          <li>
-            <Link to="/QuizGames">QuizGames</Link>
-          </li>
-          <li>
-            <Link to="/Chinchon">Chinchon</Link>
-          </li>
+          {typeGame === "QuizGames" && (
+            <>
+              <li>
+                <Link to="/QuizGames/agregar-juego">Agregar juego</Link>
+              </li>
+              <li>
+                <Link to="/QuizGames/borrarPreguntas">Borrar pregunta</Link>
+              </li>
+            </>
+          )}
+          {typeGame === "Chinchon" && (
+            <>
+              <li>
+                <Link to="/Chinchon/">Tabla</Link>
+              </li>
+              <li>
+                <Link to="/Chinchon/crearjugador">Crear jugador</Link>
+              </li>
+              <li>
+                <button>Reiniciar resultados</button>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </header>
