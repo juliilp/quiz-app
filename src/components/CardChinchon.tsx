@@ -15,7 +15,7 @@ export default function CardChinchon({ nombre, puntos }: Props) {
     setNewPuntos(Number(number));
   };
 
-  const { sumarPuntos,handlerRetroceder } = useChinchonStore();
+  const { sumarPuntos,handlerRetroceder, borrarJugador } = useChinchonStore();
 
   const handlerSumarPuntos = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,14 +28,17 @@ export default function CardChinchon({ nombre, puntos }: Props) {
   }, [puntos]);
 
   return (
-    <article className="flex flex-col">
+    <article className="flex flex-col relative">
       <h2>{nombre}</h2>
       <p>{puntosTotal}</p>
       <form onSubmit={handlerSumarPuntos}>
-        <input type="text" value={newPuntos} onChange={onChangeNewPuntos} className="border border-black" />
+        <input type="number" onChange={onChangeNewPuntos} className="border border-black" />
         <button>Sumar</button>
       </form>
       <button onClick={() => handlerRetroceder(nombre)}>Retroceder</button>
+      <button onClick={() => borrarJugador(nombre)} 
+      className="absolute top-0 right-2 "
+      >❌</button>
     </article>
   );
 }
