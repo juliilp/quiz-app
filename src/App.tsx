@@ -9,6 +9,7 @@ import QuizGames from "./vistas/QuizGames";
 import { useEffect } from "react";
 import Chinchon from "./vistas/Chinchon";
 import ChinchonStore from "./store/ChinchonStore";
+import ChinchonCrearJugador from "./vistas/ChinchonCrearJugador";
 export default function App() {
 
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function App() {
             />
             <Route path="/QuizGames" element={<QuizGames />} />
             <Route path="/Chinchon" element={<Chinchon />} />
-
+            <Route path="/Chinchon/crearjugador" element={<ChinchonCrearJugador />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
