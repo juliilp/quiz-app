@@ -22,12 +22,13 @@ export default function useLocalStorage() {
     localStorage.setItem("respuestasCorrectas", JSON.stringify([]));
     localStorage.setItem("respuestasIncorrectas", JSON.stringify([]));
   }
+
   return {
     allQuizGames,
     respuestasCorrectas,
     setRespuestasCorrectas,
     respuestasIncorrectas,
     setRespuestasIncorrectas,
-    reiniciarRespuestas
+    reiniciarRespuestas,
   };
 }
