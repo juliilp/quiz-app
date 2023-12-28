@@ -11,6 +11,7 @@ interface values {
   borrarTodosJugadores: () => void;
   handlerRetroceder: (nombre: string) => void;
   reiniciarResultados: () => void;
+  hacerMenos10 : (nombre: string) => void
 }
 export const storeChinchon = createContext<values>(null);
 
@@ -117,6 +118,24 @@ export default function ChinchonStore({ children }: any) {
     }
   };
 
+  const hacerMenos10 = (nombre: string) => {
+    // me traigo el jugador
+    const findJugador = allJugadores.find((j: Jugadores) => j.nombre === nombre);
+    if (findJugador) {
+      //Que me traiga todos los jugadores menos el jugador de arriba
+      const jugadoresFilter = allJugadores.filter((j: Jugadores) => j.nombre !== nombre);
+      // Le saco los 10 puntos
+      // Tengo que crear ésto con el push y pop 
+      const nuevosPuntos = [...findJugador.puntos]
+      nuevosPuntos.push(-10);
+      findJugador.puntos = nuevosPuntos
+      //Concateno y guardo cambios
+      const newJugadores: Jugadores[] = [...jugadoresFilter, findJugador];
+      localStorage.setItem("JugadoresChinchon", JSON.stringify(newJugadores));
+     return setAllJugadores(newJugadores);
+    }
+    console.log("test")
+  }
   const initialValue: values = {
     onChangeCreateJugadores,
     handlerAddJugadores,
@@ -127,6 +146,7 @@ export default function ChinchonStore({ children }: any) {
     borrarTodosJugadores,
     handlerRetroceder,
     reiniciarResultados,
+    hacerMenos10
   };
   return (
     <storeChinchon.Provider value={initialValue}>

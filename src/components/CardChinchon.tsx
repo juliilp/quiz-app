@@ -15,13 +15,12 @@ export default function CardChinchon({ nombre, puntos }: Props) {
     setNewPuntos(Number(number));
   };
 
-  const { sumarPuntos,handlerRetroceder, borrarJugador } = useChinchonStore();
+  const { sumarPuntos,handlerRetroceder, borrarJugador, hacerMenos10 } = useChinchonStore();
 
   const handlerSumarPuntos = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     sumarPuntos(nombre, newPuntos);
   };
-
 
   useEffect(() => {
     setPuntosTotal(puntos.reduce((acc, val) => acc + val, 0));
@@ -39,6 +38,7 @@ export default function CardChinchon({ nombre, puntos }: Props) {
       <button onClick={() => borrarJugador(nombre)} 
       className="absolute top-0 right-2 "
       >❌</button>
+      <button onClick={() => hacerMenos10(nombre)} >Menos 10</button>
     </article>
   );
 }
