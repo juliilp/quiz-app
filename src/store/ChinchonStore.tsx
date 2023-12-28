@@ -8,6 +8,8 @@ interface values {
   jugadorCreate : Jugadores,
   allJugadores: Jugadores[],
   sumarPuntos : (nombre: string, puntos: number) => void
+  borrarJugador: (nombre: string) => void
+  borrarTodosJugadores : () => void
 }
 export const storeChinchon = createContext<values>(null);
 
@@ -66,12 +68,28 @@ export default function ChinchonStore({ children }: any) {
   
     setAllJugadores(newUsers);
   };
+
+  const borrarJugador = (nombre: string) => {
+      const filterJugador = allJugadores.filter((j) => j.nombre === nombre)
+      if(!borrarJugador){
+        return alert("No se encontro el jugador")
+      }
+      localStorage.setItem("JugadoresChinchon", JSON.stringify(filterJugador));
+      setAllJugadores(filterJugador)
+  }
+
+  const borrarTodosJugadores = () => {
+    localStorage.setItem("JugadoresChinchon", JSON.stringify([]));
+      setAllJugadores([])
+  }
   const initialValue: values = {
     onChangeCreateJugadores,
     handlerAddJugadores,
     jugadorCreate,
     allJugadores,
-    sumarPuntos
+    sumarPuntos,
+    borrarJugador,
+    borrarTodosJugadores,
 
   };
   return (
