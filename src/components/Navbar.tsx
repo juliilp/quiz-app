@@ -20,6 +20,9 @@ export default function Navbar() {
           <li>
             <Link to="/QuizGames">QuizGames</Link>
           </li>
+          <li>
+            <Link to="/Chinchon">Chinchon</Link>
+          </li>
         </ul>
       </nav>
     </header>

@@ -7,6 +7,7 @@ import Resultados from "./vistas/Resultados";
 import BorrarPreguntas from "./vistas/BorrarPreguntas";
 import QuizGames from "./vistas/QuizGames";
 import { useEffect } from "react";
+import Chinchon from "./vistas/Chinchon";
 export default function App() {
 
   useEffect(() => {
@@ -32,7 +33,7 @@ export default function App() {
               element={<BorrarPreguntas />}
             />
             <Route path="/QuizGames" element={<QuizGames />} />
-         
+            <Route path="/Chinchon" element={<Chinchon />} />
 
           <Route path="/" element={<Home />} />
         </Routes>
