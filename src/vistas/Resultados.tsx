@@ -1,24 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import useQuizGamesStore from '../hooks/useQuizGamesStore'
-interface Respuesta {
-  respuesta: string;
-  isCorrect: boolean;
-}
-
-interface Pregunta {
-  pregunta: string;
-  respuestas: Respuesta[];
-  respuestaUser: boolean;
-}
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function Resultados() {
   const { accesoTerminado, AccessoTerminadoFalse, allGames } = useQuizGamesStore();
+  const {setRespuestasCorrectas,setRespuestasIncorrectas,reiniciarRespuestas} = useLocalStorage()
   const navigate = useNavigate();
-  const [respuestaCorrecta, setRespuestaCorrecta] = useState<Pregunta[]>([]);
-  const [respuestaIncorrecta, setRespuestaIncorrecta] = useState<Pregunta[]>(
-    []
-  );
+
   useEffect(() => {
     if (!accesoTerminado) {
       navigate("/QuizGames")
@@ -31,29 +20,24 @@ export default function Resultados() {
     );
 
     if (localStorageRespuestaCorrecta !== null) {
-      setRespuestaCorrecta(JSON.parse(localStorageRespuestaCorrecta));
+      setRespuestasCorrectas(JSON.parse(localStorageRespuestaCorrecta));
     }
     if (localStorageRespuestaIncorrecta !== null) {
-      setRespuestaIncorrecta(JSON.parse(localStorageRespuestaIncorrecta));
+      setRespuestasIncorrectas(JSON.parse(localStorageRespuestaIncorrecta));
     }
-    console.log("Respuestas Correctas: ");
-    console.log(respuestaCorrecta);
-    console.log("Respuestas Incorrectas: ");
-    console.log(respuestaIncorrecta);
   }, []);
 
   const handlerResultados = () => {
-    localStorage.setItem("respuestasCorrectas", JSON.stringify([]));
-    localStorage.setItem("respuestasIncorrectas", JSON.stringify([]));
+    reiniciarRespuestas()
     navigate("/");
     AccessoTerminadoFalse();
   };
 
   return (
     <main>
-      {allGames.map((g) => {
+      {allGames.map((g, key) => {
         return (
-          <article className="flex flex-col items-center justify-center gap-8" >
+          <article key={key}  className="flex flex-col items-center justify-center gap-8" >
             <h2 className="text-3xl font-semibold mt-8 ">{g.pregunta}</h2>
             <ul className="flex gap-8" >
               {g.respuestas.map((res, key) => {
@@ -80,6 +64,7 @@ export default function Resultados() {
       >
         Reiniciar resultados
       </button>
+      
     </main>
   );
 }
