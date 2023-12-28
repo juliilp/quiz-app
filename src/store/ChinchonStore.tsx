@@ -6,7 +6,8 @@ interface values {
   handlerAddJugadores: () => void;
   onChangeCreateJugadores: (e: React.ChangeEvent<HTMLInputElement>) => void;
   jugadorCreate : Jugadores,
-  allJugadores: Jugadores[]
+  allJugadores: Jugadores[],
+  sumarPuntos : (nombre: string, puntos: number) => void
 }
 export const storeChinchon = createContext<values>(null);
 
@@ -52,11 +53,26 @@ export default function ChinchonStore({ children }: any) {
     });
   };
 
+  const sumarPuntos = (nombre: string, puntos: number) => {
+    const filterUser: Jugadores[] = allJugadores.filter((u) => u.nombre === nombre);
+    const newPuntos = filterUser[0].puntos + puntos;
+    const newUser = {
+      nombre,
+      puntos: newPuntos,
+    };
+    const oldUsers: Jugadores[] = allJugadores.filter((u) => u.nombre !== nombre);
+    const newUsers = [...oldUsers, newUser];  
+    localStorage.setItem("JugadoresChinchon", JSON.stringify(newUsers));
+  
+    setAllJugadores(newUsers);
+  };
   const initialValue: values = {
     onChangeCreateJugadores,
     handlerAddJugadores,
     jugadorCreate,
-    allJugadores
+    allJugadores,
+    sumarPuntos
+
   };
   return (
     <storeChinchon.Provider value={initialValue}>

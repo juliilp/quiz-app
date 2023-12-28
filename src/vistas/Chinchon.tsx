@@ -1,3 +1,4 @@
+import CardChinchon from "../components/CardChinchon";
 import useChinchonStore from "../hooks/useChinchonStore";
 
 export default function Chinchon() {
@@ -26,6 +27,15 @@ export default function Chinchon() {
         <button>Crear jugador</button>
       </form>
 
+    <section className="flex gap-16" >
+      {
+       
+          allJugadores.map(({nombre,puntos}, key) => {
+          return <CardChinchon nombre={nombre} puntos={puntos} key={key}  />
+
+        })
+      }
+    </section>
       
     </main>
   );
