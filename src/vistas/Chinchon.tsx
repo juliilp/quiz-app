@@ -14,7 +14,7 @@ export default function Chinchon() {
     e.preventDefault()
     handlerAddJugadores()
   }
-  console.log(allJugadores)
+  const ordenJugadores = [...allJugadores].sort((a, b) => a.nombre.localeCompare(b.nombre));
   return (
     <main>
 
@@ -30,7 +30,7 @@ export default function Chinchon() {
     <section className="flex gap-16" >
       {
        
-          allJugadores.map(({nombre,puntos}, key) => {
+       ordenJugadores.map(({nombre,puntos}, key) => {
           return <CardChinchon nombre={nombre} puntos={puntos} key={key}  />
 
         })
