@@ -1,5 +1,5 @@
 
 export interface Jugadores {
     nombre : string,
-    puntos: number
+    puntos: number[]
 }

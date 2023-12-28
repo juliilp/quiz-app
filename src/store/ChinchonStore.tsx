@@ -1,34 +1,32 @@
 import { createContext, useEffect, useState } from "react";
 import { Jugadores } from "../interface/Jugadores";
 
-
 interface values {
   handlerAddJugadores: () => void;
   onChangeCreateJugadores: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  jugadorCreate : Jugadores,
-  allJugadores: Jugadores[],
-  sumarPuntos : (nombre: string, puntos: number) => void
-  borrarJugador: (nombre: string) => void
-  borrarTodosJugadores : () => void
+  jugadorCreate: Jugadores;
+  allJugadores: Jugadores[];
+  sumarPuntos: (nombre: string, puntos: number) => void;
+  borrarJugador: (nombre: string) => void;
+  borrarTodosJugadores: () => void;
+  handlerRetroceder: (nombre: string) => void;
 }
 export const storeChinchon = createContext<values>(null);
 
 export default function ChinchonStore({ children }: any) {
-  const [allJugadores, setAllJugadores] = useState<Jugadores[]>([])
+  const [allJugadores, setAllJugadores] = useState<Jugadores[]>([]);
   const [jugadorCreate, setJugadorCreate] = useState({
     nombre: "",
-    puntos: 0,
+    puntos: [0],
   });
 
- 
   useEffect(() => {
     const storedJugadoresChinchon = localStorage.getItem("JugadoresChinchon");
     const allJugadores = storedJugadoresChinchon
       ? JSON.parse(storedJugadoresChinchon)
       : [];
-      setAllJugadores(allJugadores)
-    
-  },[])
+    setAllJugadores(allJugadores);
+  }, []);
   const handlerAddJugadores = () => {
     if (jugadorCreate.nombre.length < 3) {
       return alert("Como mínimo 3 letras para el nombre");
@@ -44,7 +42,7 @@ export default function ChinchonStore({ children }: any) {
     alert("Jugador creado");
     setJugadorCreate({
       nombre: "",
-      puntos: 0,
+      puntos: [0],
     });
   };
 
@@ -56,32 +54,49 @@ export default function ChinchonStore({ children }: any) {
   };
 
   const sumarPuntos = (nombre: string, puntos: number) => {
-    const filterUser: Jugadores[] = allJugadores.filter((u) => u.nombre === nombre);
-    const newPuntos = filterUser[0].puntos + puntos;
+    const filterUser: Jugadores[] = allJugadores.filter(
+      (u) => u.nombre === nombre
+    );
+    const newPuntos = [...filterUser[0].puntos, puntos];
     const newUser = {
       nombre,
       puntos: newPuntos,
     };
-    const oldUsers: Jugadores[] = allJugadores.filter((u) => u.nombre !== nombre);
-    const newUsers = [...oldUsers, newUser];  
+    const oldUsers: Jugadores[] = allJugadores.filter(
+      (u) => u.nombre !== nombre
+    );
+    const newUsers = [...oldUsers, newUser];
     localStorage.setItem("JugadoresChinchon", JSON.stringify(newUsers));
-  
     setAllJugadores(newUsers);
   };
 
   const borrarJugador = (nombre: string) => {
-      const filterJugador = allJugadores.filter((j) => j.nombre === nombre)
-      if(!borrarJugador){
-        return alert("No se encontro el jugador")
-      }
-      localStorage.setItem("JugadoresChinchon", JSON.stringify(filterJugador));
-      setAllJugadores(filterJugador)
-  }
+    const filterJugador = allJugadores.filter((j) => j.nombre === nombre);
+    if (!borrarJugador) {
+      return alert("No se encontro el jugador");
+    }
+    localStorage.setItem("JugadoresChinchon", JSON.stringify(filterJugador));
+    setAllJugadores(filterJugador);
+  };
 
   const borrarTodosJugadores = () => {
     localStorage.setItem("JugadoresChinchon", JSON.stringify([]));
-      setAllJugadores([])
-  }
+    setAllJugadores([]);
+  };
+
+  const handlerRetroceder = (nombre: string) => {
+    const findUser = allJugadores.filter((u) => u.nombre === nombre);
+    const allUser = allJugadores.filter((u) => u.nombre !== nombre);
+    const nuevosPuntos = [...findUser[0].puntos];
+    nuevosPuntos.pop();
+    const newUsers = [
+      ...allUser,
+      { nombre: findUser[0].nombre, puntos: nuevosPuntos },
+    ];
+    localStorage.setItem("JugadoresChinchon", JSON.stringify(newUsers));
+
+    setAllJugadores(newUsers);
+  };
   const initialValue: values = {
     onChangeCreateJugadores,
     handlerAddJugadores,
@@ -90,7 +105,7 @@ export default function ChinchonStore({ children }: any) {
     sumarPuntos,
     borrarJugador,
     borrarTodosJugadores,
-
+    handlerRetroceder,
   };
   return (
     <storeChinchon.Provider value={initialValue}>
