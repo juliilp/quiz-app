@@ -30,14 +30,21 @@ export default function ChinchonStore({ children }: any) {
     setAllJugadores(allJugadores);
   }, []);
   const handlerAddJugadores = () => {
-    if (jugadorCreate.nombre.length < 3) {
-      return alert("Como mínimo 3 letras para el nombre");
-    }
-
     const storedJugadoresChinchon = localStorage.getItem("JugadoresChinchon");
     const allJugadores = storedJugadoresChinchon
       ? JSON.parse(storedJugadoresChinchon)
       : [];
+
+    const findJugador  = allJugadores.find((j: Jugadores) => j.nombre === jugadorCreate.nombre)
+
+    if(findJugador) {
+      return alert("Ya existe un jugador con ese nombre")
+    }
+    if (jugadorCreate.nombre.length < 3) {
+      return alert("Como mínimo 3 letras para el nombre");
+    }
+
+ 
 
     const newJugadores = [...(allJugadores || []), jugadorCreate];
     localStorage.setItem("JugadoresChinchon", JSON.stringify(newJugadores));
