@@ -43,40 +43,47 @@ export default function AgregarJuego() {
     
   return (
     <main className="w-full" >
-      <form onSubmit={handlerConPreventDefault} className="w-full" >
+      <form onSubmit={handlerConPreventDefault} className="w-full flex items-center justify-center gap-8 flex-col" >
         
           
-      <article className="w-full flex items-center justify-center my-12" >
+      <article className="w-full flex items-center justify-center mb-6 mt-12" >
       <input
             type="text"
             onChange={handlerOnChange}
             name="pregunta"
             value={juego.pregunta}
             placeholder="Nombre de la pregunta..."
-            className="py-2 pl-3 w-[300px] outline-none "
+            className="py-2 pl-3 w-[300px] outline-none border border-black "
           />
       </article>
        
 
-        {juego.respuestas.map((respuesta, index) => (
-          <article key={index}>
-            <span>{`Respuesta${index + 1}:`}</span>
+      <section className="flex items-center justify-center flex-col gap-4" >
+      {juego.respuestas.map((respuesta, index) => (
+       
+          <article key={index} className="flex gap-4 items-center" >
             <input
               type="text"
               name={`respuestas-${index}`}
               onChange={handlerOnChangeRespuesta(index)}
               value={respuesta.respuesta}
+              placeholder={`Respuesta...${index +1}`}
+              className="pl-3 border border-black rounded-md"
             />
-            <span>Es verdadero?</span>
+            <span className="hidden md:block" >Es verdadero?</span>
             <input
               type="checkbox"
               onChange={CheckBoxHandler(index)}
               checked={respuesta.isCorrect || false}
+              className="w-4 h-4"
             />
           </article>
         ))}
+      </section>
 
-        <button>Agregar juego</button>
+        <button 
+        className=" mt-6 rounded-lg py-2 px-6 md:px-10 font-bold text-white cursor-not-allowed bg-red-600"
+         >Agregar juego</button>
       </form>
     </main>
   );
