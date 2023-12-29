@@ -9,7 +9,7 @@ interface Props {
 export default function NavbarDesktop({handlerInicio, reiniciarResultados, typeGame} : Props) {
   return (
     <nav className="w-full hidden md:block ">
-    <ul className="flex items-center gap-4 justify-around h-16 shadow-xl">
+    <ul className={` ${typeGame ? "justify-around" : "pl-4"}  flex items-center gap-4 h-16 shadow-xl`}>
       <li>
         <Link to="/" onClick={handlerInicio}>
           Inicio
