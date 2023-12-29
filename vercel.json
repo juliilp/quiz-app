@@ -1,0 +1,32 @@
+{
+    "routes": [
+      {
+        "src": "/",
+        "dest": "/"
+      },
+      {
+        "src": "/QuizGames/agregar-juego",
+        "dest": "/"
+      },
+      {
+        "src": "/QuizGames/resultados",
+        "dest": "/"
+      },
+      {
+        "src": "/QuizGames/borrarPreguntas",
+        "dest": "/"
+      },
+      {
+        "src": "/QuizGames",
+        "dest": "/"
+      },
+      {
+        "src": "/Chinchon",
+        "dest": "/"
+      },
+      {
+        "src": "/Chinchon/crearjugador",
+        "dest": "/"
+      }
+    ]
+  }
