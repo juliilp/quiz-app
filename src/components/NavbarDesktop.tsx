@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import useQuizGamesStore from "../hooks/useQuizGamesStore";
 
 interface Props {
     handlerInicio : () => void
@@ -7,14 +8,27 @@ interface Props {
 }
 
 export default function NavbarDesktop({handlerInicio, reiniciarResultados, typeGame} : Props) {
+  const { selectQuizGames, selectChinchon } = useQuizGamesStore();
+
   return (
     <nav className="w-full hidden md:block ">
-    <ul className={` ${typeGame ? "justify-around" : "pl-4"}  flex items-center gap-4 h-16 shadow-xl`}>
+    <ul className={`justify-around flex items-center gap-4 h-16 shadow-xl`}>
       <li>
         <Link to="/" onClick={handlerInicio}>
           Inicio
         </Link>
       </li>
+      {typeGame.length === 0 && (
+        <>
+          <Link to="/QuizGames" onClick={selectQuizGames}>
+            Quiz Games
+          </Link>
+
+          <Link to="/Chinchon" className="mr-4" onClick={selectChinchon}>
+            Chinchon
+          </Link>
+        </>
+      )}
       {typeGame === "QuizGames" && (
         <>
           <li>
