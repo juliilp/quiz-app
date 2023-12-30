@@ -27,12 +27,10 @@ export default function CardChinchon({ nombre, puntos }: Props) {
     setPuntosTotal(puntos.reduce((acc, val) => acc + val, 0));
   }, [puntos]);
 
-  const primerLetra = nombre.split("")[0].toUpperCase();
-  const restoDeLetras = primerLetra + nombre.slice(1, -1).toLowerCase();
 
   return (
     <article className="flex flex-col relative  w-[300px] p-4 border border-black">
-      <h2 className="mb-6">{restoDeLetras}</h2>
+      <h2 className="mb-6">{nombre}</h2>
       <form onSubmit={handlerSumarPuntos}>
         <input
           type="number"
