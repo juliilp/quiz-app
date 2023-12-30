@@ -16,6 +16,12 @@ export default function NavbarMobile({
 
   const [switchMenu, setSwitchMenu] = useState(false);
   const handlerSwitchMenu = () => setSwitchMenu((prev) => !prev);
+
+
+  const handlerReiniciarResultados = () => {
+    reiniciarResultados()
+    handlerSwitchMenu()
+  }
   return (
     <nav className="flex md:hidden items-center justify-between h-12 relative shadow-xl">
       <Link to="/" onClick={handlerInicio} className="ml-4">
@@ -45,23 +51,31 @@ export default function NavbarMobile({
           {typeGame === "QuizGames" && (
             <>
               <li>
-                <Link to="/QuizGames/agregar-juego">Agregar juego</Link>
+                <Link to="/QuizGames/agregar-juego"
+                onClick={handlerSwitchMenu}
+                >Agregar juego</Link>
               </li>
               <li>
-                <Link to="/QuizGames/borrarPreguntas">Borrar pregunta</Link>
+                <Link to="/QuizGames/borrarPreguntas"
+                onClick={handlerSwitchMenu}
+                >Borrar pregunta</Link>
               </li>
             </>
           )}
           {typeGame === "Chinchon" && (
             <>
               <li>
-                <Link to="/Chinchon/">Tabla</Link>
+                <Link to="/Chinchon/"
+                onClick={handlerSwitchMenu}
+                >Tabla</Link>
               </li>
               <li>
-                <Link to="/Chinchon/crearjugador">Crear jugador</Link>
+                <Link to="/Chinchon/crearjugador"
+                onClick={handlerSwitchMenu}
+                >Crear jugador</Link>
               </li>
               <li>
-                <button onClick={reiniciarResultados}>
+                <button onClick={handlerReiniciarResultados}>
                   Reiniciar resultados
                 </button>
               </li>
