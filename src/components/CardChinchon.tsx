@@ -31,7 +31,7 @@ export default function CardChinchon({ nombre, puntos }: Props) {
   const restoDeLetras = primerLetra + nombre.slice(1, -1).toLowerCase()
 
   return (
-    <article className="flex flex-col relative">
+    <article className="flex flex-col relative  w-[300px] p-4 border border-black">
       <h2 className="mb-6" >{restoDeLetras}</h2>
       <form onSubmit={handlerSumarPuntos}>
         <input
