@@ -41,8 +41,8 @@ export default function CardChinchon({ nombre, puntos }: Props) {
         />
   
       <article className="flex gap-4 items-center mt-2" >
-        <button onClick={() => handlerRetroceder(nombre)}>Retroceder</button>
-      <button onClick={() => hacerMenos10(nombre)}>-10</button>
+        <button  type="button" onClick={() => handlerRetroceder(nombre)}>Retroceder</button>
+      <button  type="button" onClick={() => hacerMenos10(nombre)}>-10</button>
       <button type="submit" >Sumar</button>
       </article>
       </form>
