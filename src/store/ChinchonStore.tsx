@@ -1,19 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { Jugadores } from "../interface/Jugadores";
+import { IChinchonStore } from "../interface/IChinchonStore";
 
-interface values {
-  handlerAddJugadores: () => void;
-  onChangeCreateJugadores: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  jugadorCreate: Jugadores;
-  allJugadores: Jugadores[];
-  sumarPuntos: (nombre: string, puntos: number) => void;
-  borrarJugador: (nombre: string) => void;
-  borrarTodosJugadores: () => void;
-  handlerRetroceder: (nombre: string) => void;
-  reiniciarResultados: () => void;
-  hacerMenos10 : (nombre: string) => void
-}
-export const storeChinchon = createContext<values>(null);
+export const storeChinchon = createContext<IChinchonStore | null>(null);
 
 export default function ChinchonStore({ children }: any) {
   const [allJugadores, setAllJugadores] = useState<Jugadores[]>([]);
@@ -143,7 +132,7 @@ export default function ChinchonStore({ children }: any) {
     }
     console.log("test")
   }
-  const initialValue: values = {
+  const initialValue: IChinchonStore = {
     onChangeCreateJugadores,
     handlerAddJugadores,
     jugadorCreate,
