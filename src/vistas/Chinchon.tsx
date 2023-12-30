@@ -22,7 +22,9 @@ export default function Chinchon() {
       <ChinchonCrearJugador />
       <section className="grid justify-center items-center md:grid-cols-2 lg:grid-cols-3 my-12 gap-12">
         {ordenJugadores.map(({ nombre, puntos }, key) => {
-          return <CardChinchon nombre={nombre} puntos={puntos} key={key} />;
+          return <article className="flex items-center justify-center" >
+            <CardChinchon nombre={nombre} puntos={puntos} key={key} />;
+          </article>
         })}
       </section>
     </main>
