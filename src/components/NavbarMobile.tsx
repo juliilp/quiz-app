@@ -70,11 +70,6 @@ export default function NavbarMobile({
                 >Tabla</Link>
               </li>
               <li>
-                <Link to="/Chinchon/crearjugador"
-                onClick={handlerSwitchMenu}
-                >Crear jugador</Link>
-              </li>
-              <li>
                 <button onClick={handlerReiniciarResultados}>
                   Reiniciar resultados
                 </button>

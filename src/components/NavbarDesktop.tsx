@@ -45,9 +45,6 @@ export default function NavbarDesktop({handlerInicio, reiniciarResultados, typeG
             <Link to="/Chinchon/">Tabla</Link>
           </li>
           <li>
-            <Link to="/Chinchon/crearjugador">Crear jugador</Link>
-          </li>
-          <li>
             <button onClick={reiniciarResultados} >Reiniciar resultados</button>
           </li>
         </>
