@@ -45,20 +45,25 @@ export default function NavbarMobile({
       {typeGame.length > 0 && switchMenu && (
         <ul
           className={`${
-            typeGame == "QuizGames" && "h-24"
-          } flex items-center flex-col w-full absolute top-12 bg-white z-10 gap-4 py-6`}
+            typeGame == "QuizGames" && "h-36 py-3"
+          } flex items-center flex-col w-full absolute top-12 bg-white z-10 gap-4 py-6 shadow-xl`}
         >
           {typeGame === "QuizGames" && (
             <>
               <li>
                 <Link to="/QuizGames/agregar-juego"
                 onClick={handlerSwitchMenu}
-                >Agregar juego</Link>
+                >Agregar pregunta</Link>
               </li>
               <li>
                 <Link to="/QuizGames/borrarPreguntas"
                 onClick={handlerSwitchMenu}
                 >Borrar pregunta</Link>
+              </li>
+              <li>
+                <Link to="/QuizGames/"
+                onClick={handlerSwitchMenu}
+                >Ir a jugar</Link>
               </li>
             </>
           )}
