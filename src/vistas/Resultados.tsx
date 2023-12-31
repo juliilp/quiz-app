@@ -34,20 +34,22 @@ export default function Resultados() {
 
   const handlerResultados = () => {
     reiniciarRespuestas();
-    navigate("/");
+    navigate("/quizgames");
     AccessoTerminadoFalse();
   };
 
   return (
-    <main>
-      {allGames.map((g, key) => {
+    <main >
+     <section className="grid grid-cols-2" >
+     {allGames.map((g, key) => {
         return (
           <article
             key={key}
-            className="flex flex-col items-center justify-center gap-8"
+            className="flex flex-col items-center justify-center gap-8 border"
           >
-            <h2 className="text-3xl font-semibold mt-8 ">{g.pregunta}</h2>
-            <ul className="flex gap-8">
+           
+            <h2 className="md:text-3xl font-semibold mt-8 ">{key + 1}) {g.pregunta}</h2>
+            <ul className="flex flex-col md:flex-row gap-8">
               {g.respuestas.map((res, key) => {
                 return (
                   <li key={key} className="text-xl">
@@ -55,9 +57,11 @@ export default function Resultados() {
                       <span>{res.respuesta}✅</span>
                     ) : (
                       <span>
-                        <del>{res.respuesta}</del>❌
+                        {
+                          res.respuesta && <del>{res.respuesta} ❌</del>
+                        }
                       </span>
-                    )}
+                    )}  
                   </li>
                 );
               })}
@@ -65,6 +69,7 @@ export default function Resultados() {
           </article>
         );
       })}
+     </section>
       <article className="flex justify-center items-center">
         <button
           onClick={handlerResultados}
