@@ -23,7 +23,7 @@ export default function NavbarMobile({
     handlerSwitchMenu()
   }
   return (
-    <nav className="flex md:hidden items-center justify-between h-12 relative shadow-xl">
+    <nav className="flex md:hidden items-center justify-between h-12 relative shadow-xl  ">
       <Link to="/" onClick={handlerInicio} className="ml-4">
         Inicio
       </Link>
@@ -46,7 +46,7 @@ export default function NavbarMobile({
         <ul
           className={`${
             typeGame == "QuizGames" && "h-36 py-3"
-          } flex items-center flex-col w-full absolute top-12 bg-white z-10 gap-4 py-6 shadow-xl`}
+          } flex items-center flex-col w-full absolute top-12 bg-[#1B3B6F] z-10 gap-4 py-6 shadow-xl`}
         >
           {typeGame === "QuizGames" && (
             <>
