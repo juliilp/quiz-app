@@ -11,7 +11,7 @@ const {reiniciarResultados} = useChinchonStore()
   };
 
   return (
-    <header className="w-full">
+    <header className="w-full bg-[#1B3B6F]">
       <NavbarMobile handlerInicio={handlerInicio} reiniciarResultados={reiniciarResultados} typeGame={typeGame} />
       <NavbarDesktop handlerInicio={handlerInicio} reiniciarResultados={reiniciarResultados} typeGame={typeGame} />
     </header>
