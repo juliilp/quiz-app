@@ -14,7 +14,7 @@ export default function BorrarPreguntas() {
     }
   },[allGames])
   return (
-    <main className="flex gap-8">
+    <main className="flex gap-8 justify-center items-center flex-col md:flex-row mt-12">
       {allGames.map((g : Pregunta, key) => (
         <CardBorrarPregunta pregunta={g.pregunta} key={key} index={key} onBorrar={() => handlerBorrarPregunta(g.pregunta)} />
       ))}
