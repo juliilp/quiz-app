@@ -5,7 +5,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className="flex flex-col gap-8 mt-8 ml-6" >
+      <section className="flex flex-col gap-8 mt-8 ml-6">
         <article>
           <button onClick={selectQuizGames}>
             <Link to="/quizgames">
@@ -15,10 +15,10 @@ export default function Home() {
             </Link>
           </button>
           <p className="max-w-[350px]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-            sunt molestiae officiis vel non! Architecto, possimus voluptatem
-            necessitatibus dolorem cupiditate odio at officia unde voluptatum.
-            Fuga harum possimus nesciunt ullam.
+            Se trata de un juego donde vas a poder crear tus propias preguntas y
+            respuestas de manera ilimitada, donde lo podrías usar tanto para
+            estudiar como para divertirte, donde al final de la sección sabrías
+            cuales preguntas respondiste bien o mal
           </p>
         </article>
 
@@ -30,10 +30,10 @@ export default function Home() {
           </button>
 
           <p className="max-w-[350px]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-            sunt molestiae officiis vel non! Architecto, possimus voluptatem
-            necessitatibus dolorem cupiditate odio at officia unde voluptatum.
-            Fuga harum possimus nesciunt ullam.
+            ¡Basta de tener que contar los puntos manualmente! Disfruta del
+            juego y charlas sin pausas repetitivas entre medio, con ésta app vas
+            a poder desde tu celular o computadora sumar,restar retroceder o
+            limpiar todos los puntos las veces que vos quieras!
           </p>
         </article>
       </section>
