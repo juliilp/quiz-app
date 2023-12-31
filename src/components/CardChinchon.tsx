@@ -39,7 +39,7 @@ export default function CardChinchon({ nombre, puntos }: Props) {
           value={newPuntos}
         />
 
-        <article className="flex gap-4 items-center mt-2">
+        <article className="flex gap-10 items-center mt-2">
           <button type="button" onClick={() => handlerRetroceder(nombre)}>
             Retroceder
           </button>
