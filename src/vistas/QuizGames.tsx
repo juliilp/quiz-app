@@ -106,7 +106,7 @@ export default function Home() {
       
       <article className="flex justify-center items-center w-full my-12" >
       <button onClick={handlerSigNumero}
-      className="rounded-lg py-2 px-6 md:px-10 font-bold text-white bg-red-600"
+      className="rounded-lg py-2 px-6 md:px-10 font-bold bg-[#065a82]"
       
       >
         {preguntas.length > numero + 1 ? " Sig pregunta" : "Ver resultados"}
