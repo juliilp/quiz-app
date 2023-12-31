@@ -112,7 +112,7 @@ export default function AgregarJuego() {
             errButton ? "cursor-not-allowed" : "cursor-pointer"
           } mt-6 rounded-lg py-2 px-6 md:px-10 font-bold text-white bg-red-600`}
         >
-          Agregar juego
+          Agregar Pregunta
         </button>
       </form>
     </main>
