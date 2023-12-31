@@ -31,13 +31,13 @@ export default function App() {
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path="/QuizGames/agregar-juego" element={<AgregarJuego />} />
-            <Route path="/QuizGames/resultados" element={<Resultados />} />
+            <Route path="/quizgames/agregar-juego" element={<AgregarJuego />} />
+            <Route path="/quizgames/resultados" element={<Resultados />} />
             <Route
-              path="/QuizGames/borrarPreguntas"
+              path="/quizgames/borrarPreguntas"
               element={<BorrarPreguntas />}
             />
-            <Route path="/QuizGames" element={<QuizGames />} />
+            <Route path="/quizgames" element={<QuizGames />} />
             <Route path="/Chinchon" element={<Chinchon />} />
             <Route path="/" element={<Home />} />
           </Routes>
