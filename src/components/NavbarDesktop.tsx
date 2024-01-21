@@ -7,15 +7,11 @@ interface Props {
   typeGame: string;
 }
 
-export default function NavbarDesktop({
-  handlerInicio,
-  reiniciarResultados,
-  typeGame,
-}: Props) {
+export default function NavbarDesktop({ handlerInicio, typeGame }: Props) {
   const { selectQuizGames, selectChinchon } = useQuizGamesStore();
 
   return (
-    <nav className="w-full hidden md:block ">
+    <nav className="w-full hidden md:block absolute top-0 ">
       <ul className={`justify-around flex items-center gap-4 h-16 shadow-xl`}>
         <li>
           <Link to="/" onClick={handlerInicio}>
@@ -43,18 +39,6 @@ export default function NavbarDesktop({
             </li>
             <li>
               <Link to="/quizgames/borrarPreguntas">Borrar pregunta</Link>
-            </li>
-          </>
-        )}
-        {typeGame === "Chinchon" && (
-          <>
-            <li>
-              <Link to="/Chinchon/">Tabla</Link>
-            </li>
-            <li>
-              <button onClick={reiniciarResultados}>
-                Reiniciar resultados
-              </button>
             </li>
           </>
         )}

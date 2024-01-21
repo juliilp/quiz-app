@@ -7,21 +7,12 @@ interface Props {
   typeGame: string;
 }
 
-export default function NavbarMobile({
-  handlerInicio,
-  reiniciarResultados,
-  typeGame,
-}: Props) {
+export default function NavbarMobile({ handlerInicio, typeGame }: Props) {
   const { selectQuizGames, selectChinchon } = useQuizGamesStore();
 
   const [switchMenu, setSwitchMenu] = useState(false);
   const handlerSwitchMenu = () => setSwitchMenu((prev) => !prev);
 
-
-  const handlerReiniciarResultados = () => {
-    reiniciarResultados()
-    handlerSwitchMenu()
-  }
   return (
     <nav className="flex md:hidden items-center justify-between h-12 relative shadow-xl  ">
       <Link to="/" onClick={handlerInicio} className="ml-4">
@@ -51,33 +42,31 @@ export default function NavbarMobile({
           {typeGame === "QuizGames" && (
             <>
               <li>
-                <Link to="/QuizGames/agregar-juego"
-                onClick={handlerSwitchMenu}
-                >Agregar pregunta</Link>
+                <Link to="/QuizGames/agregar-juego" onClick={handlerSwitchMenu}>
+                  Agregar pregunta
+                </Link>
               </li>
               <li>
-                <Link to="/QuizGames/borrarPreguntas"
-                onClick={handlerSwitchMenu}
-                >Borrar pregunta</Link>
+                <Link
+                  to="/QuizGames/borrarPreguntas"
+                  onClick={handlerSwitchMenu}
+                >
+                  Borrar pregunta
+                </Link>
               </li>
               <li>
-                <Link to="/QuizGames/"
-                onClick={handlerSwitchMenu}
-                >Ir a jugar</Link>
+                <Link to="/QuizGames/" onClick={handlerSwitchMenu}>
+                  Ir a jugar
+                </Link>
               </li>
             </>
           )}
           {typeGame === "Chinchon" && (
             <>
               <li>
-                <Link to="/Chinchon/"
-                onClick={handlerSwitchMenu}
-                >Tabla</Link>
-              </li>
-              <li>
-                <button onClick={handlerReiniciarResultados}>
-                  Reiniciar resultados
-                </button>
+                <Link to="/Chinchon/" onClick={handlerSwitchMenu}>
+                  Tabla
+                </Link>
               </li>
             </>
           )}
