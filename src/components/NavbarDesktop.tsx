@@ -11,7 +11,7 @@ export default function NavbarDesktop({ handlerInicio, typeGame }: Props) {
   const { selectQuizGames, selectChinchon } = useQuizGamesStore();
 
   return (
-    <nav className="w-full hidden md:block absolute top-0 ">
+    <nav className="w-full hidden md:block absolute top-0 bg-[#1B3B6F] z-10 ">
       <ul className={`justify-around flex items-center gap-4 h-16 shadow-xl`}>
         <li>
           <Link to="/" onClick={handlerInicio}>

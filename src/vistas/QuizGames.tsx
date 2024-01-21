@@ -5,7 +5,7 @@ import { IContext } from "../interface/Icontext";
 import { Pregunta } from "../interface/Pregunta";
 
 export default function Home() {
-  const { allGames} = useQuizGamesStore();
+  const { allGames } = useQuizGamesStore();
   const { AccessoTerminadoTrue }: IContext = useQuizGamesStore();
   const navigate = useNavigate();
   const [checkBoxSelect, setCheckBoxSelect] = useState(false);
@@ -78,7 +78,7 @@ export default function Home() {
     }
   }, [allGames]);
   return (
-    <main>
+    <main className="pt-12 md:pt-32 h-screen">
       <h1 className="text-xl md:text-3xl text-center my-16">
         {preguntas[numero]?.pregunta}
       </h1>
@@ -103,14 +103,14 @@ export default function Home() {
             </article>
           ))}
       </article>
-      
-      <article className="flex justify-center items-center w-full my-12" >
-      <button onClick={handlerSigNumero}
-      className="rounded-lg py-2 px-6 md:px-10 font-bold bg-[#065a82]"
-      
-      >
-        {preguntas.length > numero + 1 ? " Sig pregunta" : "Ver resultados"}
-      </button>
+
+      <article className="flex justify-center items-center w-full my-12">
+        <button
+          onClick={handlerSigNumero}
+          className="rounded-lg py-2 px-6 md:px-10 font-bold bg-[#065a82]"
+        >
+          {preguntas.length > numero + 1 ? " Sig pregunta" : "Ver resultados"}
+        </button>
       </article>
     </main>
   );

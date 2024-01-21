@@ -14,7 +14,7 @@ export default function Chinchon() {
   };
   return (
     <main className={`w-full md:h-screen`}>
-      <article className="flex justify-center items-center mt-12 md:mt-32">
+      <article className="flex justify-center items-center pt-12 md:pt-32">
         <button
           onClick={handlerReiniciarResultados}
           className="rounded-lg py-2 px-6 md:px-10 font-bold text-white bg-red-600"

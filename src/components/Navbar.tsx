@@ -11,7 +11,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="w-full bg-[#1B3B6F]">
+    <header className="w-full bg-[#1B3B6F] z-10">
       <NavbarMobile
         handlerInicio={handlerInicio}
         reiniciarResultados={reiniciarResultados}

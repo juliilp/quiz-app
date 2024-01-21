@@ -5,7 +5,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className="flex flex-col gap-8 mt-8 ml-6">
+      <section className="flex flex-col gap-8 pt-12 md:pt-32 ml-6 h-screen">
         <article>
           <button onClick={selectQuizGames}>
             <Link to="/quizgames">

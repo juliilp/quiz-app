@@ -39,11 +39,10 @@ export default function Resultados() {
     navigate("/quizgames");
     AccessoTerminadoFalse();
   };
-  
 
   return (
-    <main>
-      <section className="grid grid-cols-2">
+    <main className="pt-12 md:pt-32 h-screen overflow-y-auto">
+      <section>
         {allGames.map((g, key) => {
           return (
             <article
@@ -55,19 +54,19 @@ export default function Resultados() {
               </h2>
               <ul className="flex flex-col md:flex-row gap-8">
                 {g.respuestas.map((res, key) => {
-                  return <>
-                    {res.respuesta && 
-                      <li key={key} className="text-sm">
-                      {res.isCorrect ? (
-                        <span>{res.respuesta}✅</span>
-                      ) : (
-                        <span>
-                          {res.respuesta} ❌
-                        </span>
+                  return (
+                    <article key={key}>
+                      {res.respuesta && (
+                        <li key={key} className="text-sm">
+                          {res.isCorrect ? (
+                            <span key={key}>{res.respuesta}✅</span>
+                          ) : (
+                            <span key={key}>{res.respuesta} ❌</span>
+                          )}
+                        </li>
                       )}
-                    </li>
-                    }
-                  </>
+                    </article>
+                  );
                 })}
               </ul>
             </article>
@@ -75,46 +74,46 @@ export default function Resultados() {
         })}
       </section>
 
-        <div className="w-full border border-dashed mt-16" />
-    <section className="my-16 flex gap-8  justify-around text-center " >
-    <article>
-        {respuestasCorrectas.length === 0 ? (
-          <h3 className="text-xl md:text-2xl" >No hay respuestas correctas 🙁</h3>
-        ) : (
-          <>
-            <h4 className="text-xl md:text-2xl" >Preguntas que has respondido bien:</h4>
-            <ul className="flex flex-col gap-4 my-6 text-lg" >
-            {respuestasCorrectas.map((r) => {
-              return (
-               
-                  <li>{r.pregunta}</li>
-              
-              );
-            })}
-            </ul>
-          </>
-        )}
-      </article>
+      <div className="w-full border border-dashed mt-16" />
+      <section className="my-16 flex gap-8  justify-around text-center ">
+        <article>
+          {respuestasCorrectas.length === 0 ? (
+            <h3 className="text-xl md:text-2xl">
+              No hay respuestas correctas 🙁
+            </h3>
+          ) : (
+            <>
+              <h4 className="text-xl md:text-2xl">
+                Preguntas que has respondido bien:
+              </h4>
+              <ul className="flex flex-col gap-4 my-6 text-lg">
+                {respuestasCorrectas.map((r, key) => {
+                  return <li key={key}>{r.pregunta}</li>;
+                })}
+              </ul>
+            </>
+          )}
+        </article>
 
-      <article>
-        {respuestasIncorrectas.length === 0 ? (
-          <h4 className="text-xl md:text-2xl" >No hay respuestas incorrectas!</h4>
-        ) : (
-          <>
-            <h4 className="text-xl md:text-2xl" >Preguntas que has respondido mal:</h4>
-           <ul className="flex flex-col gap-4 my-6 text-lg" >
-           {respuestasIncorrectas.map((r) => {
-              return (
-                
-                  <li>{r.pregunta}</li>
-               
-              );
-            })}
-           </ul>
-          </>
-        )}
-      </article>
-    </section>
+        <article>
+          {respuestasIncorrectas.length === 0 ? (
+            <h4 className="text-xl md:text-2xl">
+              No hay respuestas incorrectas!
+            </h4>
+          ) : (
+            <>
+              <h4 className="text-xl md:text-2xl">
+                Preguntas que has respondido mal:
+              </h4>
+              <ul className="flex flex-col gap-4 my-6 text-lg">
+                {respuestasIncorrectas.map((r, key) => {
+                  return <li key={key}>{r.pregunta}</li>;
+                })}
+              </ul>
+            </>
+          )}
+        </article>
+      </section>
 
       <article className="flex justify-center items-center">
         <button

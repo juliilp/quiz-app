@@ -69,7 +69,7 @@ export default function AgregarJuego() {
     setErrButon(false);
   }, [errButton, juego.pregunta, juego.respuestas]);
   return (
-    <main className="w-full">
+    <main className="pt-12 md:pt-32 h-screen w-full">
       <form
         onSubmit={handlerConPreventDefault}
         className="w-full flex items-center justify-center gap-8 flex-col"
