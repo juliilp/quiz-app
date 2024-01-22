@@ -9,6 +9,7 @@ import QuizGames from "./vistas/QuizGames";
 import { useEffect } from "react";
 import Chinchon from "./vistas/Chinchon";
 import ChinchonStore from "./store/ChinchonStore";
+import Truco from "./vistas/Truco";
 export default function App() {
   useEffect(() => {
     const existingGames = localStorage.getItem("Games");
@@ -40,6 +41,7 @@ export default function App() {
             <Route path="/quizgames" element={<QuizGames />} />
             <Route path="/Chinchon" element={<Chinchon />} />
             <Route path="/" element={<Home />} />
+            <Route path="/truco" element={<Truco />} />
           </Routes>
         </BrowserRouter>
       </ChinchonStore>
