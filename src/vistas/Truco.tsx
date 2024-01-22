@@ -38,24 +38,36 @@ export default function Truco() {
       puntos: jugador2,
     },
   ];
+
+  const handlerReiniciar = () => {
+    const result = confirm("Estas seguro de reiniciar?");
+
+    if (result) {
+      setJugador1(0);
+      setJugador2(0);
+    }
+  };
   return (
-    <main className="pt-12 md:pt-32 h-screen w-full flex gap-8  justify-center">
-      {jugadores.map((j, key) => {
-        return (
-          <section key={key} className="flex flex-col gap-8 p-5">
-            <span>{j.nombre}</span>
-            <div className="flex gap-4">
-              <button onClick={j.handlerSuma}>Sumar</button>
-              <button onClick={j.handlerResta}>Restar</button>
-            </div>
-            {j.puntos > 0 && (
-              <article>
-                <TrucoPrimerCuadrado numero={j.puntos} />
-              </article>
-            )}
-          </section>
-        );
-      })}
+    <main className="pt-12 md:pt-32 h-screen w-full flex flex-col gap-8  items-center">
+      <button onClick={handlerReiniciar}>Reiniciar</button>
+      <section className="flex gap-8">
+        {jugadores.map((j, key) => {
+          return (
+            <section key={key} className="flex flex-col gap-8 p-5">
+              <span>{j.nombre}</span>
+              <div className="flex gap-4">
+                <button onClick={j.handlerSuma}>Sumar</button>
+                <button onClick={j.handlerResta}>Restar</button>
+              </div>
+              {j.puntos > 0 && (
+                <article>
+                  <TrucoPrimerCuadrado numero={j.puntos} />
+                </article>
+              )}
+            </section>
+          );
+        })}
+      </section>
     </main>
   );
 }
